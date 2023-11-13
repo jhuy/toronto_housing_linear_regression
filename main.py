@@ -2,12 +2,12 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-num_interations_of_regression = 300
+num_interations_of_regression = 100
 
 # intercept
-theta0 = 2
+theta0 = 1
 # slope
-theta1 = 0
+theta1 = 1
 # learning rate
 alpha = 0.25
 
@@ -17,10 +17,14 @@ file = pd.read_csv('MLS.csv', delimiter=',')
 comp_index = []
 comp_benchmark_price = []
 
+# Scaling Factor of parameters
+index_scaling_factor = 1000
+benchmark_price_scaling_factor = 1000000
+
 for input in range(0,len(file.iloc[:,0])):
     if 'Toronto' in file.iloc[input,0]:
-        comp_index.append(file.iloc[:,1][input]/100)
-        comp_benchmark_price.append(file.iloc[:,2][input])
+        comp_index.append(file.iloc[:,1][input]/index_scaling_factor)
+        comp_benchmark_price.append(file.iloc[:,2][input]/benchmark_price_scaling_factor)
 
 data = []
 for index in range (0, len(comp_index)):
